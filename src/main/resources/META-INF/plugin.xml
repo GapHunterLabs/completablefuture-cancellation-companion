@@ -1,0 +1,42 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>dev.gaphunter.completablefuturecancellationcompanion</id>
+    <name>CompletableFuture Cancellation Propagation Companion</name>
+    <vendor>Gap Hunter Labs</vendor>
+    <description><![CDATA[
+        <p>Warning on a <code>.thenCompose(...)</code> chain whose
+        result future can be cancelled (a <code>.cancel(true)</code>
+        call found elsewhere in the same method), where the lambda
+        passed to <code>.thenCompose</code> directly constructs and
+        returns another <code>CompletableFuture</code> with no evidence
+        that cancellation is ever forwarded to it -- orphaned work keeps
+        running and consuming resources after the caller believes it
+        cancelled the whole operation.</p>
+        <p>A documented, real gap in issues of established libraries
+        (Reactor Core, Failsafe, OpenTelemetry Java instrumentation) --
+        <code>CompletableFuture.thenCompose</code> never propagates
+        cancellation into the inner stage on its own. No dedicated IDE
+        plugin found for this.</p>
+        <p>Stated honestly: v0.1 only the pattern where the lambda's
+        body directly returns another <code>CompletableFuture</code>
+        CONSTRUCTED in the same method
+        (<code>CompletableFuture.supplyAsync(...)</code>/
+        <code>.runAsync(...)</code>/<code>new CompletableFuture<>()</code>)
+        -- never follows the cancellation through a call to an external
+        method that returns one.</p>
+        <p>Free. No license nags, no telemetry, no network calls.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="JAVA"
+            groupName="CompletableFuture Cancellation Propagation Companion"
+            displayName="Inner future never receives cancellation"
+            enabledByDefault="true"
+            level="WARNING"
+            implementationClass="dev.gaphunter.completablefuturecancellationcompanion.inspection.CancellationPropagationInspection"/>
+        <notificationGroup id="CompletableFuture Cancellation Propagation Companion" displayType="BALLOON"/>
+    </extensions>
+</idea-plugin>
