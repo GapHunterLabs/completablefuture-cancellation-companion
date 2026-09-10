@@ -6,6 +6,12 @@ directly inside the lambda -- never receives that cancellation, so the
 orphaned work keeps running and consuming resources after the caller
 believes the whole operation stopped.
 
+## Screenshots
+
+![Screenshot 1](docs/screenshots/Screenshot_1.png)
+
+![Screenshot 2](docs/screenshots/Screenshot_2.png)
+
 ## Why it exists
 
 `CompletableFuture.thenCompose` never propagates cancellation into the
