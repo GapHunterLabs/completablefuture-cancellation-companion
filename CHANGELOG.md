@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## [0.1.1]
+
+### Fixed
+
+- Review/star CTA now links to this plugin's own Marketplace
+  reviews page instead of the vendor's generic plugin list.
+
 ## [0.1.0]
 
 ### Added
@@ -17,5 +24,6 @@
   expression-form and block-form lambdas; suppressed when a
   `.whenComplete(` call is present as evidence of manual forwarding.
 
-[Unreleased]: https://github.com/GapHunterLabs/completablefuture-cancellation-companion/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/GapHunterLabs/completablefuture-cancellation-companion/compare/0.1.1...HEAD
+[0.1.1]: https://github.com/GapHunterLabs/completablefuture-cancellation-companion/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/GapHunterLabs/completablefuture-cancellation-companion/commits/0.1.0
