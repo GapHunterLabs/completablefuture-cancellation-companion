@@ -1,0 +1,10 @@
+<html>
+<body>
+Reports a <code>.thenCompose(...)</code> whose lambda builds and returns a new <code>CompletableFuture</code>
+while the resulting future can be cancelled (a <code>.cancel(true)</code> call in the same method), with no sign that the
+cancellation is forwarded to the inner future.
+<!-- tooltip end -->
+<p><code>CompletableFuture.thenCompose</code> never propagates cancellation into the inner stage: the inner work keeps
+running and using resources after the caller believes the whole operation was cancelled.</p>
+</body>
+</html>
